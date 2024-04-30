@@ -27,9 +27,9 @@ public class Menu {
 			switch (opc) {
 			case 1:
 				try {
-					ES.consultarEquipos().stream().forEach(e -> System.out.println(e));
+					ES.consultarEquipos().forEach(System.out::println);
 				} catch (EquiposServiceException e) {
-					System.err.println(e);
+					System.err.println(e.getMessage());
 				}
 				break;
 			case 2:

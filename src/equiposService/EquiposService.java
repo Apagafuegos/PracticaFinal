@@ -27,8 +27,7 @@ public class EquiposService extends Dao {
 				eq.setNombre(rs.getString("nombre"));
 				listaEquipos.add(eq);
 			}
-			st.close();
-		} catch (SQLException e) {
+        } catch (SQLException e) {
 			throw new EquiposServiceException("Hubo un problema");
 		}
 		return listaEquipos;
@@ -44,8 +43,7 @@ public class EquiposService extends Dao {
 				listaJugadores.add(new Jugador(rs2.getInt("numero"), rs2.getString("codigo_equipo"),
 						rs2.getString("nombre"), rs2.getDate("nacimiento").toLocalDate()));
 			}
-			st2.close();
-		} catch (SQLException e) {
+        } catch (SQLException e) {
 			System.err.println(e.getMessage());
 			throw e;
 		}
@@ -66,8 +64,7 @@ public class EquiposService extends Dao {
 			} else {
 				throw new NotFoundException("No existe un equipo con ese codigo");
 			}
-			st.close();
-		} catch (SQLException e) {
+        } catch (SQLException e) {
 			throw new EquiposServiceException("Hubo un problema");
 		}
 		return eq;
@@ -81,7 +78,6 @@ public class EquiposService extends Dao {
 			st.setString(3, jugador.getNombre());
 			st.setDate(4, Date.valueOf(jugador.getFechaNacimiento()));
 			st.executeUpdate();
-			//st.close();
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			throw e;
@@ -104,7 +100,6 @@ public class EquiposService extends Dao {
 				st.setString(1, eq.getCodigo());
 				st.setString(2, eq.getNombre());
 				st.executeUpdate();
-				//st.close();
 				for (Jugador jugador : eq.getListaJugadores()) {
 					insertarJugador(conn, jugador);
 				}
