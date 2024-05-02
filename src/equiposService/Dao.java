@@ -25,9 +25,8 @@ public class Dao {
 
 	public void testConexion() {
 		Connection conn = getNewConnection();
-		if (conn == null) {
-			System.err.println("No hay conexion");
-		} else {
+		if (conn == null) System.err.println("No hay conexion");
+        else {
 			System.out.println("¡Hay conexión!");
 		}
 	}

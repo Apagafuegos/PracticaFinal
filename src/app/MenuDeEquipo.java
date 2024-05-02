@@ -2,43 +2,43 @@ package app;
 
 import equiposService.EquiposService;
 import equiposService.EquiposServiceException;
-import model.Equipo;
+import equiposService.NotFoundException;
+import model.Jugador;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EquiposRegistrados extends JFrame {
-    private JLabel equiposRegistradosLabel;
-    private JList<Equipo> listaEquipos;
-    private JPanel equiposRegistrados;
-    private JScrollPane scrollEquipos;
+public class MenuDeEquipo extends JFrame {
+    private JList<Jugador> listaJugadores;
+    private JPanel jugadoresPanel;
+    private JScrollPane scrollJugadores;
     private JButton backButton;
     private static final EquiposService equiposService = new EquiposService();
 
-    public EquiposRegistrados() {
-        setTitle("Gestión de equipos - Equipos Registrados");
+    public MenuDeEquipo(String codigoEquipo) {
+        setTitle("Gestión de equipos - Equipo");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(equiposRegistrados);
+        setContentPane(jugadoresPanel);
         setSize(500,700);
         setLocationRelativeTo(null);
         setVisible(true);
-        listaEquipos.setBackground(new Color(43,45,48));
-        listaEquipos.setForeground(new Color(196, 196, 196));
-        scrollEquipos.setBackground(new Color(43,45,48));
+        listaJugadores.setBackground(new Color(43,45,48));
+        listaJugadores.setForeground(new Color(196, 196, 196));
+        scrollJugadores.setBackground(new Color(43,45,48));
         backButton.setBackground(new Color(43,45,48));
         backButton.setForeground(new Color(196, 196, 196));
-        DefaultListModel<Equipo> modelo = new DefaultListModel<>();
+        DefaultListModel<Jugador> modelo = new DefaultListModel<>();
         try {
-            equiposService.consultarEquipos().forEach(modelo::addElement);
-        } catch (EquiposServiceException e) {
+            equiposService.consultarEquipoCompleto(codigoEquipo).getListaJugadores().forEach(modelo::addElement);
+        } catch (EquiposServiceException | NotFoundException e) {
             System.err.println(e.getMessage());
         }
-        listaEquipos.setModel(modelo);
+        listaJugadores.setModel(modelo);
         DefaultListCellRenderer renderer = new DefaultListCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
-        listaEquipos.setCellRenderer(renderer);
+        listaJugadores.setCellRenderer(renderer);
 
 
         backButton.addActionListener(new ActionListener() {
