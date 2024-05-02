@@ -4,13 +4,18 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Equipo {
 
 	private String codigo;
 	private String nombre;
-	private List<Jugador> listaJugadores;	
+	private List<Jugador> listaJugadores;
+
+	public Equipo() {
+		listaJugadores = new ArrayList<Jugador>();
+	}
 
 	public String getCodigo() {
 		return codigo;
